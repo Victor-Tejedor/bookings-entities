@@ -35,7 +35,7 @@ public class User {
     @JoinColumn(name = "logo_id", referencedColumnName = "id")
     private Logo logo;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 

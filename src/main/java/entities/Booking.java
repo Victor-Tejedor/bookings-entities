@@ -2,7 +2,7 @@ package entities;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "booking")
@@ -13,17 +13,24 @@ public class Booking {
     private int id;
 
     @Column(name = "from")
-    private Timestamp from;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date from;
 
     @Column(name = "to")
-    private Timestamp to;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date to;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @Column(name = "created_at")
-    private Timestamp createdAt;
+    @Column(name = "created_at", insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @Column(name = "modified_at", insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modifiedAt;
 
     public int getId() {
         return id;
@@ -33,19 +40,19 @@ public class Booking {
         this.id = id;
     }
 
-    public Timestamp getFrom() {
+    public Date getFrom() {
         return from;
     }
 
-    public void setFrom(Timestamp from) {
+    public void setFrom(Date from) {
         this.from = from;
     }
 
-    public Timestamp getTo() {
+    public Date getTo() {
         return to;
     }
 
-    public void setTo(Timestamp to) {
+    public void setTo(Date to) {
         this.to = to;
     }
 
@@ -57,11 +64,19 @@ public class Booking {
         this.status = status;
     }
 
-    public Timestamp getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Date getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public void setModifiedAt(Date modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 }
