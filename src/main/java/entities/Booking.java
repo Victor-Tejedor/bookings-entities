@@ -14,6 +14,10 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User user;
+
     @Column(name = "from")
     @Temporal(TemporalType.TIMESTAMP)
     private Date from;
@@ -34,12 +38,22 @@ public class Booking {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedAt;
 
+    // Standard getters and setters
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getFrom() {
