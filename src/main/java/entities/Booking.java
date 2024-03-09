@@ -18,13 +18,13 @@ public class Booking {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    @Column(name = "from")
+    @Column(name = "start", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date from;
+    private Date start;
 
-    @Column(name = "to")
+    @Column(name = "end", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date to;
+    private Date end;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
@@ -56,20 +56,20 @@ public class Booking {
         this.user = user;
     }
 
-    public Date getFrom() {
-        return from;
+    public Date getStart() {
+        return start;
     }
 
-    public void setFrom(Date from) {
-        this.from = from;
+    public void setStart(Date start) {
+        this.start = start;
     }
 
-    public Date getTo() {
-        return to;
+    public Date getEnd() {
+        return end;
     }
 
-    public void setTo(Date to) {
-        this.to = to;
+    public void setEnd(Date end) {
+        this.end = end;
     }
 
     public Status getStatus() {
